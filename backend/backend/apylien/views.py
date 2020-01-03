@@ -1,15 +1,20 @@
+from aylienapiclient import textapi
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import viewsets, generics
-from .serializers import TextualcontentSerializer, UserSerializer
-from .models import Textualcontent, CustomUser
+from rest_framework.authentication import TokenAuthentication
+from rest_framework import viewsets, permissions
+from .serializers import TextualcontentSerializer, AnalysisReportSerializer
+from rest_framework.views import APIView
+from .models import Textualcontent, AnalysisReport
 
 
 class TextualcontentViewSet(viewsets.ModelViewSet):
     queryset = Textualcontent.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = TextualcontentSerializer
 
-class UserListView(generics.ListAPIView):
-    queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+class AnalysisReportSerializer(viewsets.ModelViewSet):
+    queryset = AnalysisReport.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = AnalysisReportSerializer
