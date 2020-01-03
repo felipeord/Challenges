@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Textualcontent, AnalysisReport
+from .models import Textualcontent, AnalysisReport, CustomUser
 
 
 class TextualcontentSerializer(serializers.HyperlinkedModelSerializer):
@@ -12,3 +12,9 @@ class AnalysisReportSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = AnalysisReport
         fields = ('complete', 'result', 'textualcontext' )
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('email', 'username', )
